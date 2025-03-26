@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const taskRouter = require("./routes/task");
 const connectDB = require("./db/connect");
 const notFoundMiddleware = require("./middleware/not-found");
+const errormiddleware = require("./middleware/error-handler");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/tasks", taskRouter);
 app.use(notFoundMiddleware);
+app.use(errormiddleware);
 
 const start = async () => {
   try {
